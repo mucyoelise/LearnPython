@@ -40,7 +40,7 @@ def get_level():
         print('Level must be 1, 2, or 3')
 
 def generate_question(n):
-    lower_limit = 10**(n - 1)
+    lower_limit = 10*(n - 1)
     upper_limit = (10**n) - 1
     return randint(lower_limit, upper_limit), randint(lower_limit, upper_limit)
 
