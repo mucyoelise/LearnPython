@@ -6,6 +6,7 @@ The all_instance attribute is a list contains or the instance created in a singl
 
 '''
 
+
 class Item:
     pay_rate = 0.80 # The pay rate after 20% of discount applied
     all_instance = []
