@@ -1,91 +1,48 @@
 def main():
-
+    # Prompt the user to input a fraction as a string (e.g., "3/4")
     fract = input('Fraction: ')
-    get_perc = convert(fraction= fract)
+    # Convert the input fraction to a percentage
+    get_perc = convert(fraction=fract)
+    # Display the corresponding fuel gauge value based on the calculated percentage
     print(gauge(get_perc))
 
 def convert(fraction):
+    # Split the fraction string into numerator and denominator
     numer, denom = fraction.split('/')
     try:
+        # Convert the numerator and denominator to float to handle decimal values
         numer = float(numer)
         denom = float(denom)
     except:
+        # If the conversion fails (e.g., input is non-numeric), raise a ValueError
         raise ValueError()
     
+    # Ensure both numerator and denominator are integers (whole numbers)
     if not numer.is_integer() or not denom.is_integer():
         raise ValueError()
+    
+    # Check if the denominator is zero (to prevent division by zero)
     if denom == 0:
         raise ZeroDivisionError()
-    if numer>denom:
+    
+    # Ensure that the numerator is not greater than the denominator (invalid fraction)
+    if numer > denom:
         raise ValueError()
     
-    return round((numer/denom) * 100)
+    # Calculate the percentage as a whole number (rounded to the nearest integer)
+    return round((numer / denom) * 100)
 
 def gauge(percentage):
-    
+    # If the percentage is 1 or less, return "E" for empty
     if percentage <= 1:
         return 'E'
+    # If the percentage is 99 or more, return "F" for full
     elif percentage >= 99:
         return 'F'
+    # Otherwise, return the percentage followed by a '%' sign
     else:
         return f'{percentage}%'
 
-if __name__ == "__main__":
-    main()
-
-# Import the functions to be tested and the pytest module.
-from fuel import convert, gauge
-import pytest
-
-# Define the main function to run the tests.
-
-
-def main():
-    # Run the test functions.
-    test_convert()
-    test_gauge()
-    test_zero_division()
-    test_value_error()
-
-# Define the test for zero division.
-
-
-def test_zero_division():
-    # Check if the function raises a ZeroDivisionError as expected.
-    with pytest.raises(ZeroDivisionError):
-        convert("1/0")
-
-# Define the test for value error.
-
-
-def test_value_error():
-    # Check if the function raises a ValueError as expected.
-    with pytest.raises(ValueError):
-        convert("one/two")
-
-# Define the test for valid conversions.
-
-
-def test_convert():
-    # Test valid conversions and expected outputs.
-    assert convert("3/4") == 75
-    assert convert("1/3") == 33
-    assert convert("2/3") == 67
-
-
-def test_gauge():
-    # Test various gauge values and expected "E" outputs.
-    assert gauge(0) == "E"
-    assert gauge(1) == "E"
-    # Test various gauge values and expected "F" outputs.
-    assert gauge(99) == "F"
-    assert gauge(100) == "F"
-    # Assert that gauge(50) returns the expected percentage string "50%"
-    assert gauge(50) == "50%"
-    # Assert that gauge(75) returns the expected percentage string "75%"
-    assert gauge(75) == "75%"
-
-
-# Run the main function if this script is executed directly.
+# This ensures that the main function is called only if the script is run directly (not imported)
 if __name__ == "__main__":
     main()
