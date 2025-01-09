@@ -20,7 +20,7 @@ def random_font_program():
     # Get user input for the text to be formatted
     input_text = input('Input text to be formatted: ')
     # Generate ASCII art text with the random font and return it
-    return pyfiglet.Figlet(font=random_font).renderText(input_text)
+    return pyfiglet.Figlet(font= random_font).renderText(input_text)
 
 def customize_font_program():
     """
@@ -45,4 +45,5 @@ def customize_font_program():
     return pyfiglet.Figlet(font=preferred_font).renderText(input_text)
 
 # Entry point of the script
-main()
+if __name__ == '__main__':
+    main()
